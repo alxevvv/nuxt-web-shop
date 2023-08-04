@@ -1,0 +1,21 @@
+.text-h1 {
+  font-size: 1.6rem !important;
+  line-height: 1.6rem !important;
+  font-weight: 400 !important;
+  margin: 1rem 0;
+}
+
+.text-h2 {
+  font-size: 1.4rem !important;
+  line-height: 1.4rem !important;
+  font-weight: 400 !important;
+  margin: 1rem 0;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

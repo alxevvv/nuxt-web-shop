@@ -1,11 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: ["vuetify/lib/styles/main.sass", "@/assets/main.scss"],
+  build: {
+    transpile: ["vuetify"],
+  },
   modules: ["@invictus.codes/nuxt-vuetify", "@nuxtjs/emotion"],
-  devtools: {enabled: true},
+  devtools: {enabled: false},
   vuetify: {
     /* vuetify options */
     vuetifyOptions: {
-      // @TODO: list all vuetify options
+      theme: {
+        defaultTheme: "light",
+        themes: {
+          light: {
+            colors: {
+              primary: "#f0c000",
+              secondary: "#208080",
+              background: "#eeeeee",
+              surface: "#203040",
+            },
+          },
+        },
+      },
     },
 
     moduleOptions: {

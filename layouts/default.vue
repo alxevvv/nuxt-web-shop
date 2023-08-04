@@ -1,7 +1,19 @@
 <template>
-  <div>
-    <slot />
-  </div>
+  <v-layout>
+    <v-app-bar>
+      <v-toolbar color="surface">
+        <v-toolbar-title>
+          <nuxt-link to="/">nuxt web shop</nuxt-link>
+        </v-toolbar-title>
+      </v-toolbar>
+    </v-app-bar>
+
+    <v-main>
+      <slot />
+    </v-main>
+  </v-layout>
+
+  <v-footer id="app-footer">All rights reserved</v-footer>
 </template>
 
 <script setup lang="ts">
@@ -17,3 +29,21 @@ useHead({
   ],
 })
 </script>
+
+<style lang="scss">
+.v-app-bar {
+  .v-toolbar-title {
+    a {
+      color: #ffffff;
+      margin-left: 1rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+#app-footer {
+  max-height: 48px;
+  justify-content: flex-end;
+}
+</style>

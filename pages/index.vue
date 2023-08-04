@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <h1 class="text-h1">Nuxt Web Shop</h1>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>Products List</v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">
