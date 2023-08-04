@@ -15,20 +15,7 @@
     </nuxt-link>
 
     <v-card-text>
-      <v-row align="center" class="mx-0">
-        <v-rating
-          :model-value="product.rating"
-          color="amber"
-          density="compact"
-          half-increments
-          readonly
-          size="small"
-        ></v-rating>
-
-        <div class="text-grey ms-4">
-          {{ product.rating }} ({{ product.numReviews }} reviews)
-        </div>
-      </v-row>
+      <product-rating :product="product" />
     </v-card-text>
 
     <v-divider class="mx-4 mt-3 mb-1" />
