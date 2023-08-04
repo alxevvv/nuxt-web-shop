@@ -12,6 +12,8 @@ export default defineNuxtConfig({
   devtools: {enabled: false},
   sanity: {
     projectId: "egyyw5h5",
+    dataset: "production",
+    useCdn: true,
   },
   vuetify: {
     /* vuetify options */
@@ -21,10 +23,9 @@ export default defineNuxtConfig({
         themes: {
           light: {
             colors: {
-              primary: "#f0c000",
+              primary: "#203040",
               secondary: "#208080",
               background: "#eeeeee",
-              surface: "#203040",
             },
           },
         },

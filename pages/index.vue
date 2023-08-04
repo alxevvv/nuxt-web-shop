@@ -1,13 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>Products List</v-col>
-    </v-row>
-  </v-container>
-</template>
+  <Title>Products</Title>
 
-<script setup lang="ts">
-useHead({
-  title: "Home",
-})
-</script>
+  <products-list />
+</template>

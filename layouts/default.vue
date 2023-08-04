@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-app-bar>
-      <v-toolbar color="surface">
+      <v-toolbar color="primary">
         <v-toolbar-title>
           <nuxt-link to="/">nuxt web shop</nuxt-link>
         </v-toolbar-title>
