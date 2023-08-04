@@ -5,10 +5,14 @@
         <v-toolbar-title>
           <nuxt-link to="/">nuxt web shop</nuxt-link>
         </v-toolbar-title>
+
+        <template v-slot:append>
+          <dark-mode-switch />
+        </template>
       </v-toolbar>
     </v-app-bar>
 
-    <v-main>
+    <v-main id="app-main">
       <slot />
     </v-main>
   </v-layout>

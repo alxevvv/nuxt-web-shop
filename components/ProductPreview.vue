@@ -23,7 +23,7 @@
     <v-card-actions>
       <div class="w-100 d-flex justify-space-between">
         <v-chip size="large" color="success">${{ product.price }}</v-chip>
-        <v-btn variant="text">Add to Cart</v-btn>
+        <v-btn variant="text" color="secondary">Add to Cart</v-btn>
       </div>
     </v-card-actions>
   </v-card>

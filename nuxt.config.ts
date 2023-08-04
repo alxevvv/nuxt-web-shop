@@ -28,6 +28,13 @@ export default defineNuxtConfig({
               background: "#eeeeee",
             },
           },
+          dark: {
+            colors: {
+              primary: "#102030",
+              secondary: "#208080",
+              background: "#444444",
+            },
+          },
         },
       },
     },
