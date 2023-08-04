@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>This is a Home Page</h1>
+    <h1 class="text-h1">Nuxt Web Shop</h1>
   </div>
 </template>
 
