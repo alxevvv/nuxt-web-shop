@@ -6,6 +6,9 @@
 
 <script setup lang="ts">
 useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} - Nuxt Web Shop` : "Nuxt Web Shop"
+  },
   link: [
     {
       rel: "stylesheet",
