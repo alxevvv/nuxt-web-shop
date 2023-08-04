@@ -14,5 +14,8 @@
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
     "sass": "^1.64.2"
+  },
+  "dependencies": {
+    "@nuxtjs/emotion": "^1.0.2"
   }
 }

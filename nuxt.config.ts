@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@invictus.codes/nuxt-vuetify"],
+  modules: ["@invictus.codes/nuxt-vuetify", "@nuxtjs/emotion"],
   devtools: {enabled: true},
   vuetify: {
     /* vuetify options */
