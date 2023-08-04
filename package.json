@@ -5,8 +5,12 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@nuxtjs/emotion": "^1.0.2",
+    "@nuxtjs/sanity": "^1.8.1"
   },
   "devDependencies": {
     "@invictus.codes/nuxt-vuetify": "^0.3.0",
@@ -14,8 +18,5 @@
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
     "sass": "^1.64.2"
-  },
-  "dependencies": {
-    "@nuxtjs/emotion": "^1.0.2"
   }
 }

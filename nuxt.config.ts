@@ -4,8 +4,15 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
-  modules: ["@invictus.codes/nuxt-vuetify", "@nuxtjs/emotion"],
+  modules: [
+    "@invictus.codes/nuxt-vuetify",
+    "@nuxtjs/emotion",
+    "@nuxtjs/sanity",
+  ],
   devtools: {enabled: false},
+  sanity: {
+    projectId: "egyyw5h5",
+  },
   vuetify: {
     /* vuetify options */
     vuetifyOptions: {
