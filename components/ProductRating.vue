@@ -21,7 +21,7 @@ import {Product} from "@/models"
 withDefaults(
   defineProps<{
     product: Product
-    showNumReviews: boolean
+    showNumReviews?: boolean
   }>(),
   {
     showNumReviews: false,
