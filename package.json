@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@nuxtjs/emotion": "^1.0.2",
-    "@nuxtjs/sanity": "^1.8.1"
+    "@nuxtjs/sanity": "^1.8.1",
+    "@pinia/nuxt": "^0.4.11",
+    "pinia": "^2.1.6"
   },
   "devDependencies": {
     "@invictus.codes/nuxt-vuetify": "^0.3.0",
@@ -18,5 +20,8 @@
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
     "sass": "^1.64.2"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

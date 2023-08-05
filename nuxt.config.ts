@@ -8,8 +8,15 @@ export default defineNuxtConfig({
     "@invictus.codes/nuxt-vuetify",
     "@nuxtjs/emotion",
     "@nuxtjs/sanity",
+    "@pinia/nuxt",
   ],
   devtools: {enabled: false},
+  imports: {
+    dirs: ["./composables", "./stores"],
+  },
+  pinia: {
+    autoImports: ["defineStore", "storeToRefs", "acceptHMRUpdate"],
+  },
   sanity: {
     projectId: "egyyw5h5",
     dataset: "production",
