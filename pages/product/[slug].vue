@@ -61,23 +61,54 @@
             </v-list-item>
 
             <v-list-item>
-              <v-btn color="secondary" class="w-100">Add to cart</v-btn>
+              <v-btn color="secondary" class="w-100" @click="addToCart">
+                Add to cart
+              </v-btn>
             </v-list-item>
           </v-list>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
+
+  <v-snackbar
+    color="error"
+    location="top center"
+    v-model="snackbars.error.visible"
+  >
+    {{ snackbars.error.message }}
+
+    <template v-slot:actions>
+      <v-btn variant="text" @click="snackbars.error.visible = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
+
+  <v-snackbar
+    color="success"
+    location="top center"
+    v-model="snackbars.success.visible"
+  >
+    {{ snackbars.success.message }}
+
+    <template v-slot:actions>
+      <v-btn variant="text" @click="snackbars.success.visible = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script setup lang="ts">
 import {Product} from "@/models"
+import {useCart} from "@/stores"
 
 const route = useRoute()
-
 const slug = route.params.slug
 
 const sanity = useSanity()
+const cart = useCart()
 
 const query = groq`*[_type == "product" && slug.current == $slug][0]`
 const {data: product} = await useAsyncData(`product:${slug}`, () => {
@@ -94,4 +125,20 @@ if (!product.value) {
 const stockStatus = computed(() =>
   product.value!.countInStock > 0 ? "In stock" : "Unavailable"
 )
+
+const snackbars = reactive({
+  error: {visible: false, message: ""},
+  success: {visible: false, message: ""},
+})
+
+async function addToCart() {
+  const {error} = await cart.add(product.value!._id)
+  if (error) {
+    snackbars.error.message = error
+    snackbars.error.visible = true
+  } else {
+    snackbars.success.message = `${product.value!.name} added to the cart`
+    snackbars.success.visible = true
+  }
+}
 </script>

@@ -1,14 +1,16 @@
-export interface Asset {
+interface Asset {
   _type: "reference"
   _ref: string
 }
 
-export interface Image {
+interface Image {
   _type: "image"
   asset: Asset
 }
 
-export interface Slug {
+interface Slug {
   _type: "slug"
   current: string
 }
+
+export type {Asset, Image, Slug}

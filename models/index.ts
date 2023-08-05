@@ -1,1 +1,2 @@
-export * from "./Product"
+export * from "./sanity"
+export * from "./client"

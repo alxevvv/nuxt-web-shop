@@ -1,4 +1,4 @@
-import {Image, Slug} from "./sanity"
+import {Image, Slug} from "./internals"
 
 export interface Product {
   _id: string
