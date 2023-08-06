@@ -1,11 +1,12 @@
 <template>
   <v-card>
     <nuxt-link :to="`/product/${product.slug.current}`">
-      <sanity-image :asset-id="product.image.asset._ref" auto="format">
-        <template #default="{src}">
-          <v-img cover height="250" :src="src" />
-        </template>
-      </sanity-image>
+      <v-img
+        cover
+        :height="360"
+        :src="$urlFor(product!.image).size(360, 360).url()"
+        :alt="product!.name"
+      />
 
       <v-card-item>
         <v-card-title>

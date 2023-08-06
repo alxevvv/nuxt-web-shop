@@ -12,11 +12,7 @@
   <v-container>
     <v-row>
       <v-col :md="6" :xs="12">
-        <sanity-image :asset-id="product!.image.asset._ref" auto="format">
-          <template #default="{src}">
-            <v-img :src="src" />
-          </template>
-        </sanity-image>
+        <v-img :src="$urlFor(product!.image).url()" :alt="product!.name" />
       </v-col>
 
       <v-col :md="3" :xs="12">
