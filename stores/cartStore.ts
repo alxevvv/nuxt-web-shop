@@ -4,6 +4,8 @@ const useCartStore = defineStore("cart", () => {
   const {$urlFor} = useNuxtApp()
   const items = useCookie<CartItem[]>("cart-items", {default: () => []})
 
+  const numItems = computed(() => items.value.length)
+
   function _findItem(id: string) {
     return items.value.find(({_id}) => _id === id)
   }
@@ -56,14 +58,20 @@ const useCartStore = defineStore("cart", () => {
     }
   }
 
+  function remove(id: string) {
+    items.value = items.value.filter((item) => item._id !== id)
+  }
+
   function clear() {
     items.value = []
   }
 
   return {
     items,
+    numItems,
 
     add,
+    remove,
     clear,
   }
 })
