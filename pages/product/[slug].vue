@@ -74,7 +74,6 @@
 
 <script setup lang="ts">
 import {Product} from "@/models"
-import {useAddToCart} from "@/composables"
 
 const route = useRoute()
 const slug = route.params.slug

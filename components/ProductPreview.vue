@@ -23,7 +23,9 @@
     <v-card-actions>
       <div class="w-100 d-flex justify-space-between">
         <v-chip size="large" color="success">${{ product.price }}</v-chip>
-        <v-btn variant="text" color="secondary">Add to Cart</v-btn>
+        <v-btn variant="text" color="secondary" @click="addToCart">
+          Add to Cart
+        </v-btn>
       </div>
     </v-card-actions>
   </v-card>
@@ -32,7 +34,11 @@
 <script setup lang="ts">
 import {Product} from "@/models"
 
-defineProps<{
+const props = defineProps<{
   product: Product
 }>()
+
+const {product} = toRefs(props)
+
+const addToCart = useAddToCart(product.value)
 </script>
