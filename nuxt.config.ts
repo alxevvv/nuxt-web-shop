@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   modules: [
     "@invictus.codes/nuxt-vuetify",
     "@nuxtjs/emotion",
-    "@nuxtjs/sanity",
     "@pinia/nuxt",
     "nuxt-snackbar",
   ],
@@ -17,11 +16,6 @@ export default defineNuxtConfig({
   },
   pinia: {
     autoImports: ["defineStore", "storeToRefs", "acceptHMRUpdate"],
-  },
-  sanity: {
-    projectId: "egyyw5h5",
-    dataset: "production",
-    useCdn: true,
   },
   vuetify: {
     /* vuetify options */

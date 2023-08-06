@@ -69,14 +69,19 @@
 </template>
 
 <script setup lang="ts">
+import {q} from "groqd"
+import {useSanityClient} from "@/composables"
 import {Product} from "@/models"
 
 const route = useRoute()
 const slug = route.params.slug
 
-const sanity = useSanity()
+const sanity = useSanityClient()
 
-const query = groq`*[_type == "product" && slug.current == $slug][0]`
+const {query} = q("*")
+  .filter("_type == 'product' && slug.current == $slug")
+  .slice(0)
+
 const {data: product} = await useAsyncData(`product:${slug}`, () => {
   return sanity.fetch<Product>(query, {slug})
 })

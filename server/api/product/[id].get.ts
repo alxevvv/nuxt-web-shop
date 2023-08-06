@@ -1,9 +1,14 @@
+import {q} from "groqd"
+import {useSanityClient} from "@/composables"
 import {Product} from "@/models"
 
 export default defineEventHandler(async (event) => {
-  const sanity = useSanity()
+  const sanity = useSanityClient()
   const productId = event.context.params?.id
-  const query = groq`*[_type == "product" && _id == $productId][0]`
+  const {query} = q("*")
+    .filter("_type == 'product' && _id == $productId")
+    .slice(0)
+
   const product = await sanity.fetch<Product>(query, {productId})
 
   if (!product) {
