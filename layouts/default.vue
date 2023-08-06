@@ -7,6 +7,14 @@
         </v-toolbar-title>
 
         <template v-slot:append>
+          <nuxt-link to="/cart" class="mr-2">
+            <v-btn icon>
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
+          </nuxt-link>
+
+          <v-divider vertical class="mr-6 my-4" />
+
           <dark-mode-switch />
         </template>
       </v-toolbar>
