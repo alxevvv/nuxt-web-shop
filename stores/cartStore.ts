@@ -62,6 +62,16 @@ const useCartStore = defineStore("cart", () => {
     }
   }
 
+  function update(id: string, quantity: number) {
+    if (quantity < 1) {
+      remove(id)
+    } else {
+      items.value = items.value.map((item) =>
+        item._id === id ? {...item, quantity} : item
+      )
+    }
+  }
+
   function remove(id: string) {
     items.value = items.value.filter((item) => item._id !== id)
   }
@@ -89,6 +99,7 @@ const useCartStore = defineStore("cart", () => {
     numItems,
 
     add,
+    update,
     remove,
     clear,
   }

@@ -47,7 +47,8 @@
                     :items="
                       [...Array(item.countInStock).keys()].map((x) => x + 1)
                     "
-                    v-model="item.quantity"
+                    :model-value="item.quantity"
+                    @update:model-value="(q) => cartStore.update(item._id, q)"
                   />
                 </td>
                 <td class="text-right pa-3">
