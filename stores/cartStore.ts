@@ -5,10 +5,16 @@ const useCartStore = defineStore("cart", () => {
   const {$urlFor} = useNuxtApp()
 
   const itemsCookie = useCookies([])
-  const isItemsInit = ref(false)
+  const isItemsLoaded = ref(false)
   const items = ref<CartItem[]>([])
 
   const numItems = computed(() => items.value.length)
+  const numUnits = computed(() =>
+    items.value.reduce((acc, {quantity}) => acc + quantity, 0)
+  )
+  const itemsPrice = computed(() =>
+    items.value.reduce((acc, {price, quantity}) => acc + price * quantity, 0)
+  )
 
   function _findItem(id: string) {
     return items.value.find(({_id}) => _id === id)
@@ -81,7 +87,7 @@ const useCartStore = defineStore("cart", () => {
   }
 
   watch(items, () => {
-    if (isItemsInit.value) {
+    if (isItemsLoaded.value) {
       itemsCookie.set("cart-items", items.value)
     }
   })
@@ -91,12 +97,15 @@ const useCartStore = defineStore("cart", () => {
     if (cookieItems) {
       items.value = cookieItems
     }
-    isItemsInit.value = true
+    isItemsLoaded.value = true
   })
 
   return {
     items,
+    isItemsLoaded,
     numItems,
+    numUnits,
+    itemsPrice,
 
     add,
     update,

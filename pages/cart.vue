@@ -8,7 +8,16 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="cartStore.numItems === 0">
+    <v-row v-if="!cartStore.isItemsLoaded">
+      <v-col>
+        <v-card class="pa-5">
+          <v-icon icon="mdi-loading mdi-spin" />
+          Loading cart items...
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row v-else-if="cartStore.numItems === 0">
       <v-col>
         <v-card class="pa-5">
           Cart is empty.
@@ -23,6 +32,7 @@
           <v-table>
             <thead>
               <tr>
+                <th class="text-left">#</th>
                 <th class="text-left">&nbsp;</th>
                 <th class="text-left">Name</th>
                 <th class="text-left">Quantity</th>
@@ -32,7 +42,10 @@
             </thead>
 
             <tbody>
-              <tr v-for="item in cartStore.items" :key="item._id">
+              <tr v-for="(item, index) in cartStore.items" :key="item._id">
+                <td class="pa-3">
+                  {{ index + 1 }}
+                </td>
                 <td class="pa-3">
                   <v-img :src="item.image" :alt="item.name" />
                 </td>
@@ -52,7 +65,7 @@
                   />
                 </td>
                 <td class="text-right pa-3">
-                  <v-chip size="large" color="success">
+                  <v-chip color="success">
                     ${{ item.price * item.quantity }}
                   </v-chip>
                 </td>
@@ -69,7 +82,27 @@
       </v-col>
 
       <v-col :md="3" cols="12">
-        <v-card class="pa-5">checkout</v-card>
+        <v-card>
+          <v-list>
+            <v-list-item>
+              <h2 class="text-h2">
+                Subtotal ({{ cartStore.numUnits }} items):
+              </h2>
+
+              <v-chip size="x-large" color="success">
+                ${{ cartStore.itemsPrice }}
+              </v-chip>
+            </v-list-item>
+
+            <v-divider class="my-3" />
+
+            <v-list-item>
+              <v-btn color="secondary" class="w-100" @click="checkout">
+                Checkout
+              </v-btn>
+            </v-list-item>
+          </v-list>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -77,4 +110,8 @@
 
 <script setup lang="ts">
 const cartStore = useCartStore()
+
+function checkout() {
+  console.log("checkout")
+}
 </script>
