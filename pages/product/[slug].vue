@@ -74,14 +74,12 @@
 
 <script setup lang="ts">
 import {Product} from "@/models"
-import {useCart} from "@/stores"
+import {useAddToCart} from "@/composables"
 
 const route = useRoute()
 const slug = route.params.slug
 
 const sanity = useSanity()
-const cart = useCart()
-const snackbar = useSnackbar()
 
 const query = groq`*[_type == "product" && slug.current == $slug][0]`
 const {data: product} = await useAsyncData(`product:${slug}`, () => {
@@ -99,18 +97,5 @@ const stockStatus = computed(() =>
   product.value!.countInStock > 0 ? "In stock" : "Unavailable"
 )
 
-async function addToCart() {
-  const {error} = await cart.add(product.value!._id)
-  if (error) {
-    snackbar.add({
-      type: "error",
-      text: error,
-    })
-  } else {
-    snackbar.add({
-      type: "success",
-      text: `${product.value!.name} added to the cart`,
-    })
-  }
-}
+const addToCart = useAddToCart(product.value!)
 </script>

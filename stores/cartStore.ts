@@ -1,6 +1,6 @@
 import {CartItem, Product} from "@/models"
 
-const useCart = defineStore("cart", () => {
+const useCartStore = defineStore("cart", () => {
   const items = useCookie<CartItem[]>("cart-items", {default: () => []})
 
   function _findItem(id: string) {
@@ -68,7 +68,7 @@ const useCart = defineStore("cart", () => {
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useCart, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useCartStore, import.meta.hot))
 }
 
-export {useCart}
+export {useCartStore}
