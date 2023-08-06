@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="isValid" validate-on="blur">
+  <v-form v-model="isValid" validate-on="blur" @submit.prevent="handleSubmit">
     <v-text-field
       v-model="name"
       :rules="nameRules"
@@ -47,6 +47,10 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
+const snackbar = useSnackbar()
+const authStore = useAuthStore()
+
 const isValid = ref(false)
 const isLoading = ref(false)
 
@@ -111,4 +115,36 @@ const passwordConfirmRules = [
     return "Passwords must match each other"
   },
 ]
+
+async function handleSubmit() {
+  isLoading.value = true
+  const {data: user, error} = await useFetch("/api/users/register", {
+    method: "POST",
+    body: {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    },
+  })
+  isLoading.value = false
+  if (!user.value) {
+    snackbar.add({
+      type: "error",
+      text: error.value?.message ?? "Unable to register",
+    })
+    return
+  }
+  authStore.login(user.value)
+  snackbar.add({
+    type: "success",
+    text: `Hello, ${user.value.name}!`,
+  })
+  router.replace("/")
+}
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    router.replace("/")
+  }
+})
 </script>

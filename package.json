@@ -15,8 +15,10 @@
     "@sanity/image-url": "^1.0.2",
     "@vueuse/core": "^10.3.0",
     "@vueuse/integrations": "^10.3.0",
-    "bcryptjs": "^2.4.3",
+    "argon2": "^0.31.0",
     "groqd": "^0.15.7",
+    "jsonwebtoken": "^9.0.1",
+    "lodash": "^4.17.21",
     "nuxt-snackbar": "^1.0.3",
     "pinia": "^2.1.6",
     "universal-cookie": "^4.0.4"
@@ -24,7 +26,8 @@
   "devDependencies": {
     "@invictus.codes/nuxt-vuetify": "^0.3.0",
     "@nuxt/devtools": "latest",
-    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/lodash": "^4.14.196",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5",
     "sass": "^1.64.2"

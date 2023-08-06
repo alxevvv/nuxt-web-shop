@@ -1,11 +1,6 @@
-import {Image, Slug} from "./internals"
+import {Image, Slug, Model} from "./internals"
 
-export interface Product {
-  _id: string
-  _rev: string
-  _createdAt: string
-  _updatedAt: string
-  _type: "product"
+export interface Product extends Model<"product"> {
   name: string
   description: string
   category: string

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   css: ["vuetify/lib/styles/main.sass", "@/assets/main.scss"],
   build: {
-    transpile: ["vuetify"],
+    transpile: ["vuetify", "jsonwebtoken", "lodash"],
   },
   modules: [
     "@invictus.codes/nuxt-vuetify",

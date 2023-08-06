@@ -11,7 +11,7 @@
           <v-divider vertical class="mr-6 my-4" />
           <dark-mode-switch />
           <v-divider vertical class="mx-6 my-4" />
-          <nuxt-link to="/auth/login">Login</nuxt-link>
+          <auth-menu />
           <v-divider vertical class="mx-6 my-4" />
         </template>
       </v-toolbar>

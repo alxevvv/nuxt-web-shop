@@ -13,4 +13,12 @@ interface Slug {
   current: string
 }
 
-export type {Asset, Image, Slug}
+interface Model<T extends string> {
+  _id: string
+  _rev: string
+  _createdAt: string
+  _updatedAt: string
+  _type: T
+}
+
+export type {Asset, Image, Model, Slug}
