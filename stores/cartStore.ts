@@ -1,6 +1,7 @@
 import {CartItem, Product} from "@/models"
 
 const useCartStore = defineStore("cart", () => {
+  const {$urlFor} = useNuxtApp()
   const items = useCookie<CartItem[]>("cart-items", {default: () => []})
 
   function _findItem(id: string) {
@@ -12,7 +13,7 @@ const useCartStore = defineStore("cart", () => {
       _id: product._id,
       name: product.name,
       slug: product.slug.current,
-      // image: product.image,
+      image: $urlFor(product.image).size(128, 128).url(),
       countInStock: product.countInStock,
       price: product.price,
       quantity,
