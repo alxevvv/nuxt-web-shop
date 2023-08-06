@@ -2,7 +2,7 @@
   <v-icon v-if="!authStore.isUserInfoLoaded" icon="mdi-loading mdi-spin" />
 
   <nuxt-link v-else-if="!authStore.isAuthenticated" to="/auth/login">
-    Login
+    <v-btn variant="flat" color="primary">Login</v-btn>
   </nuxt-link>
 
   <v-menu v-else open-on-hover>
