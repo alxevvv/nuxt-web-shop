@@ -4,7 +4,7 @@ import {CartItem, Product} from "@/models"
 const useCartStore = defineStore("cart", () => {
   const {$urlFor} = useNuxtApp()
 
-  const itemsCookie = useCookies([])
+  const itemsCookie = useCookies(["cart-items"])
   const isItemsLoaded = ref(false)
   const items = ref<CartItem[]>([])
 
@@ -86,9 +86,9 @@ const useCartStore = defineStore("cart", () => {
     items.value = []
   }
 
-  watch(items, () => {
+  watch(items, (newItems) => {
     if (isItemsLoaded.value) {
-      itemsCookie.set("cart-items", items.value)
+      itemsCookie.set("cart-items", newItems, {path: "/"})
     }
   })
 
