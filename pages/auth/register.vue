@@ -20,3 +20,14 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup lang="ts">
+const router = useRouter()
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    router.replace("/")
+  }
+})
+</script>

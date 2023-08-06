@@ -37,6 +37,7 @@
 
     <v-btn
       :loading="isLoading"
+      :disabled="authStore.isAuthenticated"
       type="submit"
       block
       class="mt-2"
@@ -141,10 +142,4 @@ async function handleSubmit() {
   })
   router.replace("/")
 }
-
-onMounted(() => {
-  if (authStore.isAuthenticated) {
-    router.replace("/")
-  }
-})
 </script>

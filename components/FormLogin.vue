@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="isValid" validate-on="blur">
+  <v-form v-model="isValid" validate-on="blur" @submit.prevent="handleSubmit">
     <v-text-field
       v-model="email"
       type="email"
@@ -20,6 +20,7 @@
 
     <v-btn
       :loading="isLoading"
+      :disabled="authStore.isAuthenticated"
       type="submit"
       block
       class="mt-2"
@@ -30,6 +31,10 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
+const snackbar = useSnackbar()
+const authStore = useAuthStore()
+
 const isValid = ref(false)
 const isLoading = ref(false)
 
@@ -61,4 +66,29 @@ const passwordRules = [
     return "Password must be more than 5 characters"
   },
 ]
+
+async function handleSubmit() {
+  isLoading.value = true
+  const {data: user, error} = await useFetch("/api/users/login", {
+    method: "POST",
+    body: {
+      email: email.value,
+      password: password.value,
+    },
+  })
+  isLoading.value = false
+  if (!user.value) {
+    snackbar.add({
+      type: "error",
+      text: error.value?.statusMessage ?? "Unable to login",
+    })
+    return
+  }
+  authStore.login(user.value)
+  snackbar.add({
+    type: "success",
+    text: `Hello, ${user.value.name}!`,
+  })
+  router.replace("/")
+}
 </script>

@@ -5,6 +5,7 @@ import {Product} from "@/models"
 export default defineEventHandler(async (event) => {
   const sanity = useSanityClient()
   const productId = event.context.params?.id
+
   const {query} = q("*")
     .filter("_type == 'product' && _id == $productId")
     .slice(0)
