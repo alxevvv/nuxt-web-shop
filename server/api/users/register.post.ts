@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   if (existedUser) {
     throw createError({
       statusCode: 400,
-      statusMessage: "This E-mail address already registered",
+      message: "This E-mail address already registered",
       fatal: true,
     })
   }

@@ -134,7 +134,7 @@ async function handleSubmit() {
   if (!user.value) {
     snackbar.add({
       type: "error",
-      text: error.value?.statusMessage ?? "Unable to register",
+      text: error.value?.message ?? "Unable to register",
     })
     return
   }

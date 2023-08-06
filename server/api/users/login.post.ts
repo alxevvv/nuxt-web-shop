@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     throw createError({
       statusCode: 404,
-      statusMessage: "User not found",
+      message: "User not found",
       fatal: true,
     })
   }
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   if (!isPasswordValid) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Invalid credentials",
+      message: "Invalid credentials",
       fatal: true,
     })
   }

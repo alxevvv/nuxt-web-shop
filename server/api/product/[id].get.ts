@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   if (!product) {
     throw createError({
       statusCode: 404,
-      statusMessage: "Product not found",
+      message: "Product not found",
       fatal: true,
     })
   }

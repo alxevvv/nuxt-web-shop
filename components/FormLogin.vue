@@ -83,7 +83,7 @@ async function handleSubmit() {
   if (!user.value) {
     snackbar.add({
       type: "error",
-      text: error.value?.statusMessage ?? "Unable to login",
+      text: error.value?.message ?? "Unable to login",
     })
     return
   }
