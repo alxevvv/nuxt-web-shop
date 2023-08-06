@@ -70,34 +70,6 @@
       </v-col>
     </v-row>
   </v-container>
-
-  <v-snackbar
-    color="error"
-    location="top center"
-    v-model="snackbars.error.visible"
-  >
-    {{ snackbars.error.message }}
-
-    <template v-slot:actions>
-      <v-btn variant="text" @click="snackbars.error.visible = false">
-        Close
-      </v-btn>
-    </template>
-  </v-snackbar>
-
-  <v-snackbar
-    color="success"
-    location="top center"
-    v-model="snackbars.success.visible"
-  >
-    {{ snackbars.success.message }}
-
-    <template v-slot:actions>
-      <v-btn variant="text" @click="snackbars.success.visible = false">
-        Close
-      </v-btn>
-    </template>
-  </v-snackbar>
 </template>
 
 <script setup lang="ts">
@@ -109,6 +81,7 @@ const slug = route.params.slug
 
 const sanity = useSanity()
 const cart = useCart()
+const snackbar = useSnackbar()
 
 const query = groq`*[_type == "product" && slug.current == $slug][0]`
 const {data: product} = await useAsyncData(`product:${slug}`, () => {
@@ -126,19 +99,18 @@ const stockStatus = computed(() =>
   product.value!.countInStock > 0 ? "In stock" : "Unavailable"
 )
 
-const snackbars = reactive({
-  error: {visible: false, message: ""},
-  success: {visible: false, message: ""},
-})
-
 async function addToCart() {
   const {error} = await cart.add(product.value!._id)
   if (error) {
-    snackbars.error.message = error
-    snackbars.error.visible = true
+    snackbar.add({
+      type: "error",
+      text: error,
+    })
   } else {
-    snackbars.success.message = `${product.value!.name} added to the cart`
-    snackbars.success.visible = true
+    snackbar.add({
+      type: "success",
+      text: `${product.value!.name} added to the cart`,
+    })
   }
 }
 </script>

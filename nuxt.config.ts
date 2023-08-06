@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@nuxtjs/emotion",
     "@nuxtjs/sanity",
     "@pinia/nuxt",
+    "nuxt-snackbar",
   ],
   devtools: {enabled: false},
   imports: {

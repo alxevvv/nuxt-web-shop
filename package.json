@@ -12,6 +12,7 @@
     "@nuxtjs/emotion": "^1.0.2",
     "@nuxtjs/sanity": "^1.8.1",
     "@pinia/nuxt": "^0.4.11",
+    "nuxt-snackbar": "^1.0.3",
     "pinia": "^2.1.6"
   },
   "devDependencies": {
