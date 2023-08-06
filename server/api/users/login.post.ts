@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
   const {query} = q("*").filter("_type == 'user' && email == $email").slice(0)
 
-  const user = await sanity.fetch<User>(query, {email: body.email})
+  const user = await sanity.fetch<User | null>(query, {email: body.email})
 
   if (!user) {
     throw createError({

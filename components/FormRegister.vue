@@ -118,6 +118,9 @@ const passwordConfirmRules = [
 ]
 
 async function handleSubmit() {
+  if (!isValid.value) {
+    return
+  }
   isLoading.value = true
   const {data: user, error} = await useFetch("/api/users/register", {
     method: "POST",
@@ -131,7 +134,7 @@ async function handleSubmit() {
   if (!user.value) {
     snackbar.add({
       type: "error",
-      text: error.value?.message ?? "Unable to register",
+      text: error.value?.statusMessage ?? "Unable to register",
     })
     return
   }

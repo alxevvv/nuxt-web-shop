@@ -68,6 +68,9 @@ const passwordRules = [
 ]
 
 async function handleSubmit() {
+  if (!isValid.value) {
+    return
+  }
   isLoading.value = true
   const {data: user, error} = await useFetch("/api/users/login", {
     method: "POST",
