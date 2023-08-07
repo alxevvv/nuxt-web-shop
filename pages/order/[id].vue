@@ -118,6 +118,7 @@ const id = route.params.id
 const authStore = useAuthStore()
 
 const order = ref<Order | null>(null)
+const paypalClientId = ref("")
 
 const shippingAddressVerbose = computed(
   () =>
@@ -139,6 +140,17 @@ const paymentMethodVerbose = computed(
 const paymentStatus = computed(() =>
   order.value?.isPaid ? `Paid at ${order.value?.paidAt}` : "Not paid"
 )
+
+watch(order, async () => {
+  if (order.value && !paypalClientId.value) {
+    const result = await $fetch("/api/keys/paypal", {
+      headers: {
+        authorization: `Bearer ${authStore.userInfo?.token}`,
+      },
+    })
+    paypalClientId.value = result
+  }
+})
 
 onMounted(async () => {
   if (!authStore.isAuthenticated) {
