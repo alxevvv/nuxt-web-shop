@@ -119,6 +119,6 @@ if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useCheckoutStore, import.meta.hot))
 }
 
-export {useCheckoutStore}
+export {useCheckoutStore, paymentMethods}
 
 export type {ShippingInfo, PaymentInfo}

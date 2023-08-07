@@ -58,6 +58,9 @@
                 <v-col cols="6">Items:</v-col>
                 <v-col cols="6">${{ cartStore.itemsPrice }}</v-col>
 
+                <v-col cols="6">Tax:</v-col>
+                <v-col cols="6">${{ checkoutStore.taxPrice }}</v-col>
+
                 <v-col cols="6">Shipping:</v-col>
                 <v-col cols="6">${{ checkoutStore.shippingPrice }}</v-col>
 
@@ -134,7 +137,7 @@ async function placeOrder() {
       text: "Order successfully placed",
     })
     cartStore.clear()
-    router.replace(`/orders/${order.value?._id}`)
+    router.replace(`/order/${order.value?._id}`)
   }
   isLoading.value = false
 }
