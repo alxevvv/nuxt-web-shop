@@ -6,7 +6,11 @@ interface ShippingInfo {
   postalCode: string
 }
 
-const shippingInfoInitial = {
+interface PaymentInfo {
+  method: "" | "paypal" | "stripe" | "cash"
+}
+
+const shippingInfoInitial: ShippingInfo = {
   fullName: "",
   country: "",
   city: "",
@@ -14,11 +18,18 @@ const shippingInfoInitial = {
   postalCode: "",
 }
 
+const paymentInfoInitial: PaymentInfo = {
+  method: "",
+}
+
 const useCheckoutStore = defineStore("checkout", () => {
   const authStore = useAuthStore()
 
   const {data: shippingInfo, isInitialized: isShippingInfoInitialized} =
     useCookieRef<ShippingInfo>("shipping-info", shippingInfoInitial)
+
+  const {data: paymentInfo, isInitialized: isPaymentInfoInitialized} =
+    useCookieRef<PaymentInfo>("payment-info", paymentInfoInitial)
 
   const isLoginCompleted = computed(() => authStore.isAuthenticated)
   const isShippingInfoCompleted = computed(
@@ -29,27 +40,37 @@ const useCheckoutStore = defineStore("checkout", () => {
       !!shippingInfo.value.address &&
       !!shippingInfo.value.postalCode
   )
-  const isPaymentMethodCompleted = computed(() => false)
+  const isPaymentInfoCompleted = computed(
+    () => !!isPaymentInfoInitialized.value && !!paymentInfo.value.method
+  )
   const isPlaceOrderCompleted = computed(() => false)
 
   function setShippingInfo(data: ShippingInfo) {
     shippingInfo.value = data
   }
 
+  function setPaymentInfo(data: PaymentInfo) {
+    paymentInfo.value = data
+  }
+
   function reset() {
-    shippingInfo.value = shippingInfoInitial
+    setShippingInfo(shippingInfoInitial)
+    setPaymentInfo(paymentInfoInitial)
   }
 
   return {
     shippingInfo,
     isShippingInfoInitialized,
+    paymentInfo,
+    isPaymentInfoInitialized,
 
     isLoginCompleted,
     isShippingInfoCompleted,
-    isPaymentMethodCompleted,
+    isPaymentInfoCompleted,
     isPlaceOrderCompleted,
 
     setShippingInfo,
+    setPaymentInfo,
     reset,
   }
 })
@@ -59,3 +80,5 @@ if (import.meta.hot) {
 }
 
 export {useCheckoutStore}
+
+export type {ShippingInfo, PaymentInfo}

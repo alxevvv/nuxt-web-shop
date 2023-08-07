@@ -28,15 +28,15 @@
 
     <div class="flex-grow-1">
       <v-icon
-        :color="checkoutStore.isPaymentMethodCompleted ? 'success' : undefined"
+        :color="checkoutStore.isPaymentInfoCompleted ? 'success' : undefined"
       >
         mdi-{{
-          checkoutStore.isPaymentMethodCompleted
+          checkoutStore.isPaymentInfoCompleted
             ? "check-bold"
             : "numeric-3-circle"
         }}
       </v-icon>
-      <span :class="{['text-success']: checkoutStore.isPaymentMethodCompleted}">
+      <span :class="{['text-success']: checkoutStore.isPaymentInfoCompleted}">
         Payment Method
       </span>
     </div>

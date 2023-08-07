@@ -20,6 +20,7 @@ const useAuthStore = defineStore("auth", () => {
   function logout() {
     userInfo.value = null
     checkoutStore.reset()
+    setLoginSuccessRedirect("/")
   }
 
   function setLoginSuccessRedirect(path: string) {

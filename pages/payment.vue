@@ -1,5 +1,5 @@
 <template>
-  <Title>Shipping Address</Title>
+  <Title>Payment Method</Title>
 
   <v-container>
     <v-row>
@@ -12,15 +12,15 @@
 
     <v-row>
       <v-col cols="6" offset="3">
-        <h1 class="text-h1">Shipping Address</h1>
+        <h1 class="text-h1">Payment Method</h1>
       </v-col>
     </v-row>
 
-    <v-row v-if="!checkoutStore.isShippingInfoInitialized">
+    <v-row v-if="!checkoutStore.isPaymentInfoInitialized">
       <v-col cols="6" offset="3">
         <v-card class="pa-5">
           <v-icon icon="mdi-loading mdi-spin" />
-          Loading shipping info...
+          Loading payment info...
         </v-card>
       </v-col>
     </v-row>
@@ -28,7 +28,7 @@
     <v-row v-else>
       <v-col cols="6" offset="3">
         <v-card class="pa-5">
-          <form-shipping-info />
+          <form-payment-info />
         </v-card>
       </v-col>
     </v-row>
@@ -42,8 +42,10 @@ const checkoutStore = useCheckoutStore()
 
 onMounted(() => {
   if (!checkoutStore.isLoginCompleted) {
-    authStore.setLoginSuccessRedirect("/shipping")
+    authStore.setLoginSuccessRedirect("/payment")
     router.replace("/auth/login")
+  } else if (!checkoutStore.isShippingInfoCompleted) {
+    router.replace("/shipping")
   }
 })
 </script>
