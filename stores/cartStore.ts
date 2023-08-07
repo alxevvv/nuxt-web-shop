@@ -1,12 +1,12 @@
-import {useCookies} from "@vueuse/integrations/useCookies"
 import {CartItem, Product} from "@/models"
 
 const useCartStore = defineStore("cart", () => {
   const {$urlFor} = useNuxtApp()
 
-  const itemsCookie = useCookies(["cart-items"])
-  const isItemsLoaded = ref(false)
-  const items = ref<CartItem[]>([])
+  const {data: items, isInitialized: isItemsLoaded} = useCookieRef<CartItem[]>(
+    "cart-items",
+    []
+  )
 
   const numItems = computed(() => items.value.length)
   const numUnits = computed(() =>
@@ -85,20 +85,6 @@ const useCartStore = defineStore("cart", () => {
   function clear() {
     items.value = []
   }
-
-  watch(items, (newItems) => {
-    if (isItemsLoaded.value) {
-      itemsCookie.set("cart-items", newItems, {path: "/"})
-    }
-  })
-
-  onMounted(() => {
-    const cookieItems = itemsCookie.get("cart-items")
-    if (cookieItems) {
-      items.value = cookieItems
-    }
-    isItemsLoaded.value = true
-  })
 
   return {
     items,
