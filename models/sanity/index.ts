@@ -1,2 +1,6 @@
+export * from "./Order"
+export * from "./OrderItem"
+export * from "./PaymentResult"
 export * from "./Product"
+export * from "./ShippingAddress"
 export * from "./User"

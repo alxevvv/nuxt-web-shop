@@ -48,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-const router = useRouter()
 const snackbar = useSnackbar()
 const authStore = useAuthStore()
 

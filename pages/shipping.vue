@@ -38,12 +38,15 @@
 <script setup lang="ts">
 const router = useRouter()
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 const checkoutStore = useCheckoutStore()
 
 onMounted(() => {
   if (!checkoutStore.isLoginCompleted) {
     authStore.setLoginSuccessRedirect("/shipping")
     router.replace("/auth/login")
+  } else if (cartStore.numItems === 0) {
+    router.replace("/cart")
   }
 })
 </script>

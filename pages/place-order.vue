@@ -63,8 +63,14 @@
 
                 <v-divider />
 
-                <v-col cols="6">Total:</v-col>
-                <v-col cols="6">${{ checkoutStore.totalPrice }}</v-col>
+                <v-col cols="6">
+                  <span class="font-weight-bold">Total:</span>
+                </v-col>
+                <v-col cols="6">
+                  <span class="font-weight-bold">
+                    ${{ checkoutStore.totalPrice }}
+                  </span>
+                </v-col>
               </v-row>
             </v-list-item>
           </v-list>
@@ -94,18 +100,43 @@ const checkoutStore = useCheckoutStore()
 
 const isLoading = ref(false)
 
-function placeOrder() {
-  try {
-    isLoading.value = true
-    console.log("order placement")
-  } catch (err) {
+async function placeOrder() {
+  isLoading.value = true
+  const {data: order, error} = await useFetch("/api/order/create", {
+    method: "POST",
+    body: {
+      items: cartStore.items.map((item, idx) => ({
+        _key: idx.toString(),
+        name: item.name,
+        quantity: item.quantity,
+        image: item.image,
+        price: item.price,
+      })),
+      shippingInfo: checkoutStore.shippingInfo,
+      paymentMethod: checkoutStore.paymentInfo.method,
+      itemsPrice: cartStore.itemsPrice,
+      shippingPrice: checkoutStore.shippingPrice,
+      taxPrice: checkoutStore.taxPrice,
+      totalPrice: checkoutStore.totalPrice,
+    },
+    headers: {
+      authorization: `Bearer ${authStore.userInfo?.token}`,
+    },
+  })
+  if (error.value) {
     snackbar.add({
       type: "error",
-      text: (err as Error).message,
+      text: error.value.message,
     })
-  } finally {
-    isLoading.value = false
+  } else {
+    snackbar.add({
+      type: "success",
+      text: "Order successfully placed",
+    })
+    cartStore.clear()
+    router.replace(`/orders/${order.value?._id}`)
   }
+  isLoading.value = false
 }
 
 onMounted(() => {
