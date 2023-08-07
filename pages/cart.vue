@@ -109,9 +109,10 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
 const cartStore = useCartStore()
 
 function checkout() {
-  console.log("checkout")
+  router.push("/shipping")
 }
 </script>

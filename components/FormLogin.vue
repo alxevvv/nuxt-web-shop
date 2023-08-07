@@ -92,6 +92,5 @@ async function handleSubmit() {
     type: "success",
     text: `Hello, ${user.value.name}!`,
   })
-  router.replace("/")
 }
 </script>
