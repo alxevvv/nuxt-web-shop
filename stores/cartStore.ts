@@ -13,7 +13,9 @@ const useCartStore = defineStore("cart", () => {
     items.value.reduce((acc, {quantity}) => acc + quantity, 0)
   )
   const itemsPrice = computed(() =>
-    items.value.reduce((acc, {price, quantity}) => acc + price * quantity, 0)
+    round(
+      items.value.reduce((acc, {price, quantity}) => acc + price * quantity, 0)
+    )
   )
 
   function _findItem(id: string) {
