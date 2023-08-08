@@ -6,6 +6,10 @@
           <nuxt-link to="/">nuxt web shop</nuxt-link>
         </v-toolbar-title>
 
+        <span class="mx-5">
+          <form-search />
+        </span>
+
         <template v-slot:append>
           <cart-button />
           <v-divider vertical class="mr-6 my-4" />
