@@ -11,8 +11,12 @@ const useAuthStore = defineStore("auth", () => {
 
   const isAuthenticated = computed(() => !!userInfo.value)
 
-  function login(data: UserInfo) {
+  function updateUserInfo(data: UserInfo) {
     userInfo.value = data
+  }
+
+  function login(data: UserInfo) {
+    updateUserInfo(data)
     router.replace(loginSuccessRedirect.value)
     setLoginSuccessRedirect("/")
   }
@@ -32,6 +36,7 @@ const useAuthStore = defineStore("auth", () => {
     isUserInfoLoaded,
     isAuthenticated,
 
+    updateUserInfo,
     login,
     logout,
     setLoginSuccessRedirect,

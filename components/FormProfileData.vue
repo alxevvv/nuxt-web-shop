@@ -13,6 +13,7 @@
       type="email"
       :rules="emailRules"
       label="E-mail"
+      autocomplete="username"
       variant="outlined"
       required
     />
@@ -22,8 +23,8 @@
       type="password"
       :rules="passwordRules"
       label="Password"
+      autocomplete="new-password"
       variant="outlined"
-      required
     />
 
     <v-text-field
@@ -31,19 +32,18 @@
       type="password"
       :rules="passwordConfirmRules"
       label="Password confirm"
+      autocomplete="new-password"
       variant="outlined"
-      required
     />
 
     <v-btn
-      :loading="isLoading"
-      :disabled="authStore.isAuthenticated"
-      type="submit"
       block
+      :loading="isLoading"
+      type="submit"
       class="mt-2"
-      text="Submit"
+      text="Continue"
       color="secondary"
-    ></v-btn>
+    />
   </v-form>
 </template>
 
@@ -87,12 +87,7 @@ const emailRules = [
 
 const passwordRules = [
   (value: string) => {
-    if (value) return true
-
-    return "Password is required."
-  },
-  (value: string) => {
-    if (value.length > 5) return true
+    if (value.length === 0 || value.length > 5) return true
 
     return "Password must be more than 5 characters"
   },
@@ -100,12 +95,7 @@ const passwordRules = [
 
 const passwordConfirmRules = [
   (value: string) => {
-    if (value) return true
-
-    return "Password is required."
-  },
-  (value: string) => {
-    if (value.length > 5) return true
+    if (value.length === 0 || value.length > 5) return true
 
     return "Password must be more than 5 characters"
   },
@@ -120,27 +110,41 @@ async function handleSubmit() {
   if (!isValid.value) {
     return
   }
+
   isLoading.value = true
-  const {data: user, error} = await useFetch("/api/users/register", {
-    method: "POST",
+
+  const {data: user, error} = await useFetch("/api/users/me", {
+    method: "PATCH",
     body: {
       name: name.value,
       email: email.value,
       password: password.value,
     },
+    headers: {
+      authorization: `Bearer ${authStore.userInfo?.token}`,
+    },
   })
   isLoading.value = false
+
   if (!user.value) {
     snackbar.add({
       type: "error",
-      text: error.value?.message ?? "Unable to register",
+      text: error.value?.message ?? "Unable to update profile info",
     })
     return
   }
-  authStore.login(user.value)
+  authStore.updateUserInfo(user.value)
   snackbar.add({
     type: "success",
-    text: `Hello, ${user.value.name}!`,
+    text: "Profile info updated successfully",
   })
+
+  password.value = ""
+  passwordConfirm.value = ""
 }
+
+onMounted(() => {
+  name.value = authStore.userInfo?.name ?? ""
+  email.value = authStore.userInfo?.email ?? ""
+})
 </script>
