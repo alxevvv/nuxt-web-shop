@@ -78,6 +78,21 @@
             </v-list>
           </div>
         </v-card>
+
+        <v-card v-if="!searchStore.isCategoriesLoading" class="pa-5 mt-5">
+          <v-select
+            hide-details
+            v-model="searchStore.sort"
+            :items="[
+              {title: 'Default', value: 'default'},
+              {title: 'Price: Low to High', value: 'lowest'},
+              {title: 'Price: High to Low', value: 'highest'},
+              {title: 'Top rated', value: 'toprated'},
+            ]"
+            variant="solo-filled"
+            label="Sorting"
+          />
+        </v-card>
       </v-col>
 
       <v-col :md="9" cols="12">

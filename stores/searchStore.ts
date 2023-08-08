@@ -89,7 +89,7 @@ const useSearchStore = defineStore("search", () => {
       newUrlQuery.rating = rating.value
     }
 
-    if (sort.value === "lowest") {
+    if (sort.value !== "default") {
       newUrlQuery.sort = sort.value
     }
 
@@ -125,6 +125,8 @@ const useSearchStore = defineStore("search", () => {
       updateProducts()
     }
   }
+
+  watch(sort, updateProducts)
 
   onMounted(async () => {
     isCategoriesLoading.value = true
