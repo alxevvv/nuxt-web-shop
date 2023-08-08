@@ -129,7 +129,6 @@
 <script setup lang="ts">
 import {Order} from "@/models"
 import {PaymentInfo, paymentMethods} from "@/stores"
-import {usePayPal} from "@/composables"
 
 const router = useRouter()
 const route = useRoute()
