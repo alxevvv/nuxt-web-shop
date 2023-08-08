@@ -3,8 +3,8 @@
     <nuxt-link :to="`/product/${product.slug.current}`">
       <v-img
         cover
-        :height="360"
-        :src="$urlFor(product!.image).size(360, 360).url()"
+        :height="props.imageHeight"
+        :src="imageUrl"
         :alt="product!.name"
       />
 
@@ -35,11 +35,23 @@
 <script setup lang="ts">
 import {Product} from "@/models"
 
-const props = defineProps<{
-  product: Product
-}>()
+const {$urlFor} = useNuxtApp()
+
+const props = withDefaults(
+  defineProps<{
+    product: Product
+    imageHeight?: number
+  }>(),
+  {
+    imageHeight: 360,
+  }
+)
 
 const {product} = toRefs(props)
+
+const imageUrl = computed(() =>
+  $urlFor(product.value!.image).size(props.imageHeight, props.imageHeight).url()
+)
 
 const addToCart = useAddToCart(product.value)
 </script>

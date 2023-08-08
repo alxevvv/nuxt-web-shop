@@ -11,7 +11,6 @@
 <script setup lang="ts">
 import {q} from "groqd"
 import {Product} from "@/models"
-import {useSanityClient} from "@/composables"
 
 const sanity = useSanityClient()
 

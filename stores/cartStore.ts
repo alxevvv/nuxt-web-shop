@@ -38,7 +38,7 @@ const useCartStore = defineStore("cart", () => {
     const existItem = _findItem(id)
     const quantity = (existItem?.quantity ?? 0) + 1
 
-    const {data: product, error} = await useFetch(`/api/product/${id}`)
+    const {data: product, error} = await useFetch<Product>(`/api/product/${id}`)
 
     if (!product.value) {
       return {
