@@ -4,6 +4,9 @@ dependencies:
   '@nuxtjs/emotion':
     specifier: ^1.0.2
     version: 1.0.2
+  '@paypal/paypal-js':
+    specifier: ^6.0.1
+    version: 6.0.1
   '@pinia/nuxt':
     specifier: ^0.4.11
     version: 0.4.11(vue@3.3.4)
@@ -1294,6 +1297,12 @@ packages:
       micromatch: 4.0.5
       napi-wasm: 1.1.0
     dev: true
+
+  /@paypal/paypal-js@6.0.1:
+    resolution: {integrity: sha512-bvYetmkg2GEC6onsUJQx1E9hdAJWff2bS3IPeiZ9Sh9U7h26/fIgMKm240cq/908sbSoDjHys75XXd8at9OpQA==}
+    dependencies:
+      promise-polyfill: 8.3.0
+    dev: false
 
   /@phc/format@1.0.0:
     resolution: {integrity: sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==}
@@ -5611,6 +5620,10 @@ packages:
       bluebird:
         optional: true
     dev: true
+
+  /promise-polyfill@8.3.0:
+    resolution: {integrity: sha512-H5oELycFml5yto/atYqmjyigJoAo3+OXwolYiH7OfQuYlAqhxNvTfiNMbV9hsC6Yp83yE5r2KTVmtrG6R9i6Pg==}
+    dev: false
 
   /promise-retry@2.0.1:
     resolution: {integrity: sha512-y+WKFlBR8BGXnsNlIHFGPZmyDf3DFMoLhaflAnyZgV6rG6xu+JwesTo2Q9R6XwYmtmwAFCkAk3e35jEdoeh/3g==}

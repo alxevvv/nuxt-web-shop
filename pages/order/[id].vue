@@ -100,6 +100,20 @@
               </v-row>
             </v-list-item>
           </v-list>
+
+          <v-divider class="mt-3 mb-5" />
+
+          <div
+            v-if="order.paymentMethod === 'paypal'"
+            id="paypal-button-container"
+          >
+            <div v-if="isPaypalLoading" class="text-center">
+              <v-progress-circular indeterminate />
+            </div>
+            <div v-else-if="paypalError">
+              <v-alert type="error" :text="paypalError" />
+            </div>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -109,6 +123,7 @@
 <script setup lang="ts">
 import {Order} from "@/models"
 import {PaymentInfo, paymentMethods} from "@/stores"
+import {usePayPal} from "@/composables"
 
 const router = useRouter()
 const route = useRoute()
@@ -118,7 +133,6 @@ const id = route.params.id
 const authStore = useAuthStore()
 
 const order = ref<Order | null>(null)
-const paypalClientId = ref("")
 
 const shippingAddressVerbose = computed(
   () =>
@@ -141,16 +155,16 @@ const paymentStatus = computed(() =>
   order.value?.isPaid ? `Paid at ${order.value?.paidAt}` : "Not paid"
 )
 
-watch(order, async () => {
-  if (order.value && !paypalClientId.value) {
-    const result = await $fetch("/api/keys/paypal", {
-      headers: {
-        authorization: `Bearer ${authStore.userInfo?.token}`,
-      },
-    })
-    paypalClientId.value = result
-  }
-})
+const paypalLoadingTrigger = computed(
+  () => !!order.value && order.value.paymentMethod === "paypal"
+)
+
+const {
+  clientId: paypalClientId,
+  client: paypal,
+  isLoading: isPaypalLoading,
+  error: paypalError,
+} = usePayPal("#paypal-button-container", paypalLoadingTrigger)
 
 onMounted(async () => {
   if (!authStore.isAuthenticated) {
