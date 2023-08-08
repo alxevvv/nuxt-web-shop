@@ -108,12 +108,15 @@
               v-if="order.paymentMethod === 'paypal'"
               id="paypal-button-container"
             >
-              <div v-if="isPaypalLoading" class="text-center">
+              <div
+                v-if="isPaypalClientLoading || isPaypalPaymentLoading"
+                class="text-center"
+              >
                 <v-progress-circular indeterminate />
               </div>
 
-              <div v-else-if="paypalError">
-                <v-alert type="error" :text="paypalError" />
+              <div v-else-if="paypalClientLoadingError">
+                <v-alert type="error" :text="paypalClientLoadingError" />
               </div>
             </div>
           </template>
@@ -158,16 +161,11 @@ const paymentStatus = computed(() =>
   order.value?.isPaid ? `Paid at ${order.value?.paidAt}` : "Not paid"
 )
 
-const paypalLoadingTrigger = computed(
-  () => !!order.value && order.value.paymentMethod === "paypal"
-)
-
 const {
-  clientId: paypalClientId,
-  client: paypal,
-  isLoading: isPaypalLoading,
-  error: paypalError,
-} = usePayPal("#paypal-button-container", paypalLoadingTrigger)
+  clientLoadingError: paypalClientLoadingError,
+  isClientLoading: isPaypalClientLoading,
+  isPaymentLoading: isPaypalPaymentLoading,
+} = usePayPal("#paypal-button-container", order)
 
 onMounted(async () => {
   if (!authStore.isAuthenticated) {
