@@ -23,6 +23,14 @@
 
       <v-list-item>
         <v-list-item-title>
+          <nuxt-link to="/order/history">
+            <v-btn variant="flat">Orders</v-btn>
+          </nuxt-link>
+        </v-list-item-title>
+      </v-list-item>
+
+      <v-list-item>
+        <v-list-item-title>
           <v-btn variant="flat" @click="logout">Logout</v-btn>
         </v-list-item-title>
       </v-list-item>
