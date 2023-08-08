@@ -101,19 +101,22 @@
             </v-list-item>
           </v-list>
 
-          <v-divider class="mt-3 mb-5" />
+          <template v-if="!order.isPaid">
+            <v-divider class="mt-3 mb-5" />
 
-          <div
-            v-if="order.paymentMethod === 'paypal'"
-            id="paypal-button-container"
-          >
-            <div v-if="isPaypalLoading" class="text-center">
-              <v-progress-circular indeterminate />
+            <div
+              v-if="order.paymentMethod === 'paypal'"
+              id="paypal-button-container"
+            >
+              <div v-if="isPaypalLoading" class="text-center">
+                <v-progress-circular indeterminate />
+              </div>
+
+              <div v-else-if="paypalError">
+                <v-alert type="error" :text="paypalError" />
+              </div>
             </div>
-            <div v-else-if="paypalError">
-              <v-alert type="error" :text="paypalError" />
-            </div>
-          </div>
+          </template>
         </v-card>
       </v-col>
     </v-row>

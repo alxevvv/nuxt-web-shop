@@ -33,7 +33,10 @@ function usePayPal(
   watchOnce(clientId, async () => {
     if (clientId.value) {
       try {
-        client.value = await loadScript({clientId: clientId.value})
+        client.value = await loadScript({
+          clientId: clientId.value,
+          currency: "USD",
+        })
       } catch (err) {
         console.error(err)
         error.value = "Failed to load the PayPal JS SDK script"
